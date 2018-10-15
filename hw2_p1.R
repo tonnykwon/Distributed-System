@@ -3,8 +3,9 @@ x = 2018
 m = 32
 
 bloom_filter = function(x){
+  isFP = TRUE
   result = array()
-  while(length(result)==length(unique(result))){
+  while(isFP){
     i=1
     m = 32
     h1 = hash_map(i,x,m)
@@ -15,9 +16,13 @@ bloom_filter = function(x){
     i=4
     h4 = hash_map(i,x,m)
     x=x+1;
-    result = append(result, c(h1, h2, h3, h4))
+    temp = c(h1,h2,h3,h4)
+    if(all(temp %in% result)){
+      isFP= FALSE
+    }
+    result = append(result,temp)
   }
-  print(result)
+  print(paste("year:",x,", ",result))
 }
 
 hash_map = function(i, x, m){
