@@ -15,14 +15,15 @@ bloom_filter = function(x){
     h3 = hash_map(i,x,m)
     i=4
     h4 = hash_map(i,x,m)
-    x=x+1;
     temp = c(h1,h2,h3,h4)
     if(all(temp %in% result)){
       isFP= FALSE
     }
     result = append(result,temp)
+    print(paste("year:",x,", ",temp))
+    
+    x=x+1;
   }
-  print(paste("year:",x,", ",result))
 }
 
 hash_map = function(i, x, m){
